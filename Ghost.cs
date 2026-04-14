@@ -18,7 +18,7 @@ namespace topic_5_baddie_class
         private SpriteEffects _direction;
         private float _animatedSpeed;
         private float _seconds;
-
+        private float _opacity;
         public Rectangle Rect
         {
             get { return _location; }
@@ -32,7 +32,7 @@ namespace topic_5_baddie_class
             _direction = SpriteEffects.None;
             _animatedSpeed = 0.2f;
             _seconds = 0;
-
+            _opacity = 1f;
         }
 
         public void Update(GameTime gameTime, MouseState mouseState)
@@ -62,17 +62,19 @@ namespace topic_5_baddie_class
                 _speed = Vector2.Zero;
                 _textureindex = 0;
                 _seconds = 0f;
+                _opacity = 0.3f;
             }
-            else if(_speed != Vector2.Zero)
+            else if (_speed != Vector2.Zero)
             {
                 _seconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if(_seconds > _animatedSpeed)
+                if (_seconds > _animatedSpeed)
                 {
                     _seconds = 0;
                     _textureindex++;
-                    if(_textureindex >= _textures.Count)
+                    if (_textureindex >= _textures.Count)
                         _textureindex = 1;
                 }
+                _opacity = 1f;
             }
                 _location.Offset(_speed);
 
@@ -80,7 +82,7 @@ namespace topic_5_baddie_class
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_textures[_textureindex], _location, null, Color.White, 0f, Vector2.Zero, _direction, 1);
+            spriteBatch.Draw(_textures[_textureindex], _location, null, Color.White * _opacity, 0f, Vector2.Zero, _direction, 1);
 
         }
         public bool Contains(Point player)

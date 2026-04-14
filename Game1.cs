@@ -98,7 +98,7 @@ namespace topic_5_baddie_class
                 foreach(Ghost g in ghosts)
                 {
                     g.Update(gameTime, mouseState);
-                    if (g.Intersects(new Rectangle(mouseState.X, mouseState.Y, 40, 40)))
+                    if (g.Intersects(new Rectangle(mouseState.X + 30, mouseState.Y + 30, 10, 10)) && mouseState.LeftButton == ButtonState.Pressed)
                        screen = Screen.End;
                 }
             }
